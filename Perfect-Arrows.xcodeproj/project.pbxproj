@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84BA42D8285B9D92005FF305 /* Arrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BA42D7285B9D92005FF305 /* Arrow.swift */; };
 		84F89B792858B2ED00A6AB7F /* Perfect_ArrowsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F89B782858B2ED00A6AB7F /* Perfect_ArrowsApp.swift */; };
 		84F89B7B2858B2ED00A6AB7F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F89B7A2858B2ED00A6AB7F /* ContentView.swift */; };
 		84F89B7D2858B2EE00A6AB7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84F89B7C2858B2EE00A6AB7F /* Assets.xcassets */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		84BA42D7285B9D92005FF305 /* Arrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arrow.swift; sourceTree = "<group>"; };
 		84F89B752858B2ED00A6AB7F /* Perfect-Arrows.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Perfect-Arrows.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		84F89B782858B2ED00A6AB7F /* Perfect_ArrowsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Perfect_ArrowsApp.swift; sourceTree = "<group>"; };
 		84F89B7A2858B2ED00A6AB7F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 			children = (
 				84F89B782858B2ED00A6AB7F /* Perfect_ArrowsApp.swift */,
 				84F89B7A2858B2ED00A6AB7F /* ContentView.swift */,
+				84BA42D7285B9D92005FF305 /* Arrow.swift */,
 				84F89B7C2858B2EE00A6AB7F /* Assets.xcassets */,
 				84F89B7E2858B2EE00A6AB7F /* Perfect_Arrows.entitlements */,
 				84F89B7F2858B2EE00A6AB7F /* Preview Content */,
@@ -261,6 +264,7 @@
 			files = (
 				84F89B7B2858B2ED00A6AB7F /* ContentView.swift in Sources */,
 				84F89B792858B2ED00A6AB7F /* Perfect_ArrowsApp.swift in Sources */,
+				84BA42D8285B9D92005FF305 /* Arrow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
