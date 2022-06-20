@@ -30,13 +30,8 @@ struct CurvedLine: Shape {
             */
             
             // draw the curve
-            p.move(to: pStart)
-            p.addQuadCurve(to: pEnd, control: arrowData.2)
-            p.move(to: pStart)
-            p.addQuadCurve(to: pEnd, control: arrowData.1)
-            p.addLine(to: arrowData.0)
-            p.addLine(to: arrowData.1)
-            p.addLine(to: arrowData.2)
+            p.move(to: arrowData.0)
+            p.addQuadCurve(to: arrowData.2, control: arrowData.1)
             // draw the arrow
         }
     }

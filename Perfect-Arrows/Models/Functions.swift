@@ -10,13 +10,13 @@ import SwiftUI
 
 // MARK: - Arrow function
 
-func getArrow(_ p1: CGPoint, _ p2: CGPoint, padding: CGFloat = 5, bow: CGFloat = 0.5) -> (CGPoint, CGPoint, CGPoint, Angle, Angle, Angle){
+func getArrow(_ p1: CGPoint, _ p2: CGPoint, padding: CGFloat = 15, bow: CGFloat = 0.5) -> (CGPoint, CGPoint, CGPoint, Angle, Angle, Angle){
     let angle = getAngle(from: p1, to: p2)
     let distance = getDistance(from: p1, to: p2)
     let angliness = getAngliness(p1, p2)
     
     // Arrow is an arc
-    let rot = ((getSector(angle: angle).truncatingRemainder(dividingBy: 2) == 0) ? 1 : -1) * 1
+    let rot = (getSector(angle: angle).truncatingRemainder(dividingBy: 2) == 0 ? 1 : -1) * 1
     let arc = bow
     
     let control = getPointBetween(p1, p2, d: 0.5)
@@ -61,8 +61,8 @@ func rotatePoint(_ p1: CGPoint, around p2: CGPoint, angle: Angle) -> CGPoint {
     c = cos(angle.radians)
     let change = p1 - p2
     let x = change.x * c - change.y * s,
-        y = change.x * s - change.y * c
-    return CGPoint(x: x, y: y)
+        y = change.x * s + change.y * c
+    return CGPoint(x: x + p2.x, y: y + p2.y)
 }
 
 func getDistance(from p1: CGPoint, to p2: CGPoint) -> CGFloat {
@@ -88,7 +88,7 @@ func getPointBetween(_ p1: CGPoint, _ p2: CGPoint, d: CGFloat = 0.5) -> CGPoint 
 func getSector(angle: Angle, sectors s: Double = 8) -> Double {
     let a = angle.radians
     
-    return floor(Double( s * (0.5 + a / (.pi * 2).truncatingRemainder(dividingBy: s)) ))
+    return floor(Double( s * (0.5 + (a / (.pi * 2)).truncatingRemainder(dividingBy: s))))
 }
 
 func getAngliness(_ p1: CGPoint, _ p2: CGPoint) -> CGFloat {

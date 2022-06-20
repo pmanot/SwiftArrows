@@ -20,9 +20,12 @@ struct ContentView: View {
                 .animation(.default, value: draggedPoint)
                 .overlay {
                     Circle()
-                        .frame(width: 20, height: 20)
+                        .frame(width: 15, height: 15)
                         .position(draggedPoint)
                         .gesture(dragGesture)
+                    Circle()
+                        .frame(width: 15, height: 15)
+                        .position(CGPoint(x: screen.size.width/2, y: screen.size.height/2))
                 }
         }
     }
