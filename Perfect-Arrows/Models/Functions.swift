@@ -32,7 +32,7 @@ func getArrow(_ p1: CGPoint, _ p2: CGPoint, padding: CGFloat = 15, bow: CGFloat 
     let aS = getAngle(from: rotatedPoint, to: p1)
     let aE = getAngle(from: rotatedPoint, to: p2)
     
-    let paddedControl = getPointBetween(projectPoint1, projectPoint1, d: 0.5)
+    let paddedControl = getPointBetween(projectPoint1, projectPoint2, d: 0.5)
     let paddedControl2 = getPointBetween(projectPoint1, projectPoint2, d: 0.5 - arc)
     let paddedRotatedPoint = rotatePoint(paddedControl2, around: paddedControl, angle: Angle(radians: .pi / Double(2 * rot)))
     
