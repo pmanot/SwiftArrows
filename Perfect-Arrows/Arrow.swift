@@ -12,15 +12,17 @@ struct Arrow: View {
     let endPoint: CGPoint = CGPoint.init(x: 300, y: 400)
     let startPadding: CGFloat = 50
     let endPadding: CGFloat = 10
+    var arrowData: (CGPoint, CGPoint, CGPoint, Angle, Angle, Angle) { getArrow(startPoint, endPoint) }
     var body: some View {
         GeometryReader { screen in
-            CurvedLine(startPoint, endPoint, bow: 5)
-                .stroke(lineWidth: 2)
-                .overlay {
-                    Circle()
-                        .frame(width: 20, height: 20)
-                        .position(startPoint)
-                }
+            ZStack {
+                ArrowHead()
+                    .rotationEffect(arrowData.4)
+                    .frame(width: 20, height: 20)
+                    .position(arrowData.2)
+                    
+            }
+            
         }
     }
     
@@ -48,30 +50,6 @@ func getEdges(in frame: CGSize, position: CGPoint) -> [CGPoint] {
     ]
 }
 
-extension CGPoint {
-    init(from p1: CGPoint, displacement: CGFloat, gradient m: CGFloat){
-        let changeX = displacement / sqrt(1 + m.magnitudeSquared)
-        let changeY = m * changeX
-        let point = p1 + CGPoint(x: changeX, y: changeY)
-        self.init(x: point.x, y: point.y)
-    }
-    
-    static func + (left: CGPoint, right: CGPoint) -> CGPoint {
-        return CGPoint(x: left.x + right.x, y: left.y + right.y)
-    }
-    
-    static func - (left: CGPoint, right: CGPoint) -> CGPoint {
-        return CGPoint(x: left.x - right.x, y: left.y - right.y)
-    }
-    
-    static func / (left: CGPoint, right: CGFloat) -> CGPoint {
-        return CGPoint(x: left.x/right, y: left.y/right)
-    }
-    
-    static func * (left: CGPoint, right: CGFloat) -> CGPoint {
-        return CGPoint(x: left.x*right, y: left.y*right)
-    }
-}
 
 func gradient(_ p1: CGPoint, _ p2: CGPoint) -> CGFloat {
     let change = (p1 - p2)
