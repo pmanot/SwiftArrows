@@ -16,22 +16,16 @@ struct ContentView: View {
     }
     var rect1: CGRect { CGRect(origin: draggedPoint, size: CGSize(width: 100, height: 100)) }
     var rect2: CGRect { CGRect(origin: startPoint, size: CGSize(width: 100, height: 100)) }
-    var arrowData: (CGPoint, CGPoint, CGPoint, Angle, Angle, Angle) { getBoxtoBoxArrow(rect1: rect1, rect2: rect2, padding: 0, allowStraight: true) }
+    var arrowData: (CGPoint, CGPoint, CGPoint, Angle, Angle, Angle) { getBoxToBoxArrow2(rect1: rect1, rect2: rect2) }
     var body: some View {
         GeometryReader { screen in
             ZStack {
+                CGRectangle(rect1)
+                    .gesture(dragGesture)
+                CGRectangle(rect2)
                 CurvedLine(arrowData.0, arrowData.2, control: arrowData.1)
                     .stroke(lineWidth: 2)
                     .animation(.default, value: draggedPoint)
-                    .overlay {
-                        CGRectangle(rect1)
-                            .gesture(dragGesture)
-                        CGRectangle(rect2)
-                    }
-                ArrowHead()
-                    .rotationEffect(arrowData.3)
-                    .frame(width: 20, height: 20)
-                    .position(arrowData.2)
             }
             .onAppear {
                 startPoint = CGPoint(x: screen.size.width / 2, y: screen.size.height / 2)

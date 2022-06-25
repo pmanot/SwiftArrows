@@ -9,6 +9,10 @@ import Foundation
 import SwiftUI
 
 extension CGPoint {
+    init(_ x: Double, _ y: Double) {
+        self.init(x: x, y: y)
+    }
+    
     init(from p1: CGPoint, displacement: CGFloat, gradient m: CGFloat){
         let changeX = displacement / sqrt(1 + m.magnitudeSquared)
         let changeY = m * changeX
