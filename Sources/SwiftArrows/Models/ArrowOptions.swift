@@ -25,12 +25,12 @@ public struct ArrowOptions: Hashable {
 }
 
 public struct ArrowData {
-    var start: CGPoint
-    var control: CGPoint
-    var end: CGPoint
-    var startAngle: CGFloat
-    var midAndle: CGFloat
-    var endAngle: CGFloat
+    public var start: CGPoint
+    public var control: CGPoint
+    public var end: CGPoint
+    public var startAngle: CGFloat
+    public var midAndle: CGFloat
+    public var endAngle: CGFloat
     
     public init(start: CGPoint, control: CGPoint, end: CGPoint, startAngle: CGFloat, midAndle: CGFloat, endAngle: CGFloat) {
         self.start = start

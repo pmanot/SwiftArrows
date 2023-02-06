@@ -331,7 +331,7 @@ public func getRectangleSegmentIntersectedByRay(ray: Ray, rect: CGRect) -> Segme
     return nil
 }
 
-public func getArrow(from point1: CGPoint, to point2: CGPoint, options: ArrowOptions = ArrowOptions()) -> (CGPoint, CGPoint, CGPoint, CGFloat, CGFloat, CGFloat) {
+public func getArrow(from point1: CGPoint, to point2: CGPoint, options: ArrowOptions = ArrowOptions()) -> ArrowData {
     let angle = getAngle(point1: point1, point2: point2)
     let distance = getDistance(point1: point1, point2: point2)
     let angliness = getAngliness(point1: point1, point2: point2)
@@ -353,7 +353,7 @@ public func getArrow(from point1: CGPoint, to point2: CGPoint, options: ArrowOpt
         let end = projectPoint(point: point2, angle: angle + .pi, distance: pEnd)
         let mid = getPointBetween(point1: start, point2: end, distance: 0.5)
         
-        return (start, mid, end, angle, angle, angle)
+        return ArrowData(start: start, control: mid, end: end, startAngle: angle, midAndle: angle, endAngle: angle)
     }
     
     let rotation: Double = (getSector(angle: angle) % 2 == 0 ? 1 : -1) * (flip ? -1 : 1)
@@ -378,11 +378,11 @@ public func getArrow(from point1: CGPoint, to point2: CGPoint, options: ArrowOpt
     
     let control = getPointBetween(point1: control1, point2: control2, distance: 0.5)
     
-    return (start, control, end, endAngle, startAngle, angle)
+    return ArrowData(start: start, control: control, end: end, startAngle: startAngle, midAndle: angle, endAngle: endAngle)
 }
 
 
-public func getBoxToBoxArrow(from rect1: CGRect, to rect2: CGRect, options: ArrowOptions = ArrowOptions()) -> (CGPoint, CGPoint, CGPoint, CGFloat, CGFloat, CGFloat) {
+public func getBoxToBoxArrow(from rect1: CGRect, to rect2: CGRect, options: ArrowOptions = ArrowOptions()) -> ArrowData {
     let padStart = options.padStart ?? 0
     let padEnd = options.padEnd ?? 0
     let bow = options.bow ?? 0
@@ -404,7 +404,7 @@ public func getBoxToBoxArrow(from rect1: CGRect, to rect2: CGRect, options: Arro
         let control = getPointBetween(point1: start, point2: end, distance: 0.5)
         let controlAngle = getAngle(point1: start, point2: end)
         
-        return (start, end, control, controlAngle, controlAngle, controlAngle)
+        return ArrowData(start: start, control: control, end: end, startAngle: controlAngle, midAndle: controlAngle, endAngle: controlAngle)
     }
     
     let rotation: Double = (getSector(angle: angle) % 2 == 0 ? 1 : -1) * (flip ? -1 : 1)
@@ -420,7 +420,8 @@ public func getBoxToBoxArrow(from rect1: CGRect, to rect2: CGRect, options: Arro
     if (!isColliding && straights && card.truncatingRemainder(dividingBy: 0.5) == 0) {
         // Draw a straight line
         let mid = getPointBetween(point1: directLine.start, point2: directLine.end, distance: 0.5)
-        return (directLine.start, mid, directLine.end, angle, angle - .pi, angle)
+        
+        return ArrowData(start: directLine.start, control: mid, end: directLine.end, startAngle: angle - .pi, midAndle: angle, endAngle: angle)
     }
     
     // How much are the two boxes overlapping?
@@ -488,6 +489,6 @@ public func getBoxToBoxArrow(from rect1: CGRect, to rect2: CGRect, options: Arro
     let startAngle = getAngle(point1: cornerIntersection, point2: startPoint)
     let endAngle = getAngle(point1: cornerIntersection, point2: endPoint)
     
-    return (startPoint, cornerIntersection, endPoint, endAngle, startAngle, getAngle(point1: startPoint, point2: endPoint))
+    return ArrowData(start: startPoint, control: cornerIntersection, end: endPoint, startAngle: startAngle, midAndle: getAngle(point1: startPoint, point2: endPoint), endAngle: endAngle)
 }
 
