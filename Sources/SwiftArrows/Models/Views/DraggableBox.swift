@@ -7,23 +7,22 @@
 
 import SwiftUI
 
-struct DraggableBox<Content: View>: View {
+public struct DraggableBox<Content: View>: View {
     //@Binding var location: CGPoint
     @Binding var frame: CGRect
     @State private var position: CGPoint
     @State private var offset: CGSize = .zero
     var content: () -> Content
     
-    init(frame: Binding<CGRect>, content: @escaping () -> Content) {
+    public init(frame: Binding<CGRect>, content: @escaping () -> Content) {
         self._frame = frame
         self.position = frame.wrappedValue.center
         self.content = content
     }
     
-    var body: some View {
+    public var body: some View {
         content()
             .frame(width: frame.width, height: frame.height)
-            .contentShape(.interaction, Rectangle())
             .position(frame.center)
             .gesture(
                 DragGesture()
@@ -42,13 +41,3 @@ struct DraggableBox<Content: View>: View {
             )
     }
 }
-
-/*
-struct DraggableBox_Previews: PreviewProvider {
-    static var previews: some View {
-        DraggableBox(frame: .constant(CGRect(x: 0, y: 0, width: 100, height: 100)) {
-            Circle()
-        }
-    }
-}
-*/

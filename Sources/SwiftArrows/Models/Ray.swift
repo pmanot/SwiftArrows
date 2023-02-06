@@ -8,10 +8,11 @@
 import Foundation
 import SwiftUI
 
-struct Ray: Hashable {
+public struct Ray: Hashable {
     var origin: CGPoint
     var direction: CGVector
     
     var dx: CGFloat { direction.dx }
     var dy: CGFloat { direction.dy }
 }
+

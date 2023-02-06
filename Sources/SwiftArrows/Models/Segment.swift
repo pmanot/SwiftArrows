@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct Segment: Hashable {
+public struct Segment: Hashable {
     var start: CGPoint
     var end: CGPoint
     
@@ -20,7 +20,7 @@ struct Segment: Hashable {
     var vector: CGVector { self.end - self.start }
 }
 
-extension Segment {
+public extension Segment {
     func getIntersection(ray: Ray) -> CGPoint? {
         let r, s, d: CGFloat
         if (ray.dy * (self.end.x - self.start.x) != ray.dx * (self.end.y - self.start.y)) {
@@ -39,7 +39,7 @@ extension Segment {
     var length: CGFloat { getDistance(point1: start, point2: end) }
 }
 
-extension Segment {
+public extension Segment {
     static var zero: Self = Self.init(start: CGPoint.zero, end: CGPoint.zero)
 }
 

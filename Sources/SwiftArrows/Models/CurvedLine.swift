@@ -8,18 +8,18 @@
 import Foundation
 import SwiftUI
 
-struct CurvedLine: Shape {
+public struct CurvedLine: Shape {
     var start: CGPoint
     var end: CGPoint
     var control: CGPoint
     
-    init(from start: CGPoint, to end: CGPoint, control: CGPoint){
+    public init(from start: CGPoint, to end: CGPoint, control: CGPoint){
         self.start = start
         self.end = end
         self.control = control
     }
     
-    func path(in rect: CGRect) -> Path {
+    public func path(in rect: CGRect) -> Path {
         return Path { p in
             
             // draw the curve

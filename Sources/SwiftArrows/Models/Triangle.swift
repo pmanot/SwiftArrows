@@ -8,8 +8,8 @@
 import Foundation
 import SwiftUI
 
-struct Triangle: Shape {
-    func path(in rect: CGRect) -> Path {
+public struct Triangle: Shape {
+    public func path(in rect: CGRect) -> Path {
         var path = Path()
         
         path.move(to: CGPoint(x: rect.midX, y: rect.minY))
@@ -19,4 +19,6 @@ struct Triangle: Shape {
 
         return path
     }
+    
+    public init() { }
 }

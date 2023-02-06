@@ -7,8 +7,8 @@
 
 import Foundation
 
-extension CGRect {
-    func getRectangleSegments() -> [Segment] {
+public extension CGRect {
+    public func getRectangleSegments() -> [Segment] {
         let x = self.origin.x
         let y = self.origin.y
         let w = self.size.width
@@ -22,7 +22,7 @@ extension CGRect {
         ]
     }
     
-    func getRoundedRectangleSegments(r: CGFloat) -> [Segment] {
+    public func getRoundedRectangleSegments(r: CGFloat) -> [Segment] {
         let x = origin.x
         let y = origin.y
         let w = size.width

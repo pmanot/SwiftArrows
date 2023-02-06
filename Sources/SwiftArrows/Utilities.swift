@@ -9,12 +9,12 @@ import Foundation
 import SwiftUI
 
 public struct Math {
-    static var pi: CGFloat = .pi
-    static var halfPi: CGFloat = .pi/2
-    static var minimumAngle: CGFloat = .pi/24
+    public static var pi: CGFloat = .pi
+    public static var halfPi: CGFloat = .pi/2
+    public static var minimumAngle: CGFloat = .pi/24
 }
 
-func modulate(value: Double, from rangeA: (Double, Double), to rangeB: (Double, Double), clamp: Bool = false) -> Double {
+public func modulate(value: Double, from rangeA: (Double, Double), to rangeB: (Double, Double), clamp: Bool = false) -> Double {
     // calculate the result by multiplying the value by the ratio of the rangeB and rangeA
     let result = rangeB.0 + ((value - rangeA.0) / (rangeA.1 - rangeA.0)) * (rangeB.1 - rangeB.0)
     
@@ -39,7 +39,7 @@ func modulate(value: Double, from rangeA: (Double, Double), to rangeB: (Double, 
     return result
 }
 
-func rotate(point: CGPoint, center: CGPoint, angle: Double) -> CGPoint {
+public func rotate(point: CGPoint, center: CGPoint, angle: Double) -> CGPoint {
     let s = sin(angle)
     let c = cos(angle)
     
@@ -53,41 +53,41 @@ func rotate(point: CGPoint, center: CGPoint, angle: Double) -> CGPoint {
     return CGPoint(x: n.x + center.x, y: n.y + center.y)
 }
 
-func getDistance(point1: CGPoint, point2: CGPoint) -> CGFloat {
+public func getDistance(point1: CGPoint, point2: CGPoint) -> CGFloat {
     // use the Pythagorean theorem to calculate the distance between two points
     return hypot(point1.y - point2.y, point1.x - point2.x)
 }
 
-func getAngle(point1: CGPoint, point2: CGPoint) -> CGFloat {
+public func getAngle(point1: CGPoint, point2: CGPoint) -> CGFloat {
     // use atan2 to calculate the angle between two points
     return atan2(point2.y - point1.y, point2.x - point1.x)
 }
 
-func projectPoint(point: CGPoint, angle: CGFloat, distance: CGFloat) -> CGPoint {
+public func projectPoint(point: CGPoint, angle: CGFloat, distance: CGFloat) -> CGPoint {
     // use trigonometry to calculate the new x and y values by projecting the point a certain distance at a certain angle
     let x = cos(angle) * distance + point.x
     let y = sin(angle) * distance + point.y
     return CGPoint(x: x, y: y)
 }
 
-func getPointBetween(point1: CGPoint, point2: CGPoint, distance: CGFloat = 0.5) -> CGPoint {
+public func getPointBetween(point1: CGPoint, point2: CGPoint, distance: CGFloat = 0.5) -> CGPoint {
     // calculate the x and y values between two points by multiplying the difference by a certain distance
     let x = point1.x + (point2.x - point1.x) * distance
     let y = point1.y + (point2.y - point1.y) * distance
     return CGPoint(x: x, y: y)
 }
 
-func getSector(angle: Double, segments: Int = 8) -> Int {
+public func getSector(angle: Double, segments: Int = 8) -> Int {
     // calculate the sector of an angle by dividing it by the total angle (2 * pi) and rounding down
     return Int(floor(CGFloat(segments) * (0.5 + ((angle / (.pi * 2)).truncatingRemainder(dividingBy: CGFloat(segments))))))
 }
 
-func getAngliness(point1: CGPoint, point2: CGPoint) -> CGFloat {
+public func getAngliness(point1: CGPoint, point2: CGPoint) -> CGFloat {
     // calculate the ratio of the difference between x values to the difference between y values
     return abs(((point2.x - point1.x) / 2) / ((point2.y - point1.y) / 2))
 }
 
-func getRaySegmentIntersection(ray: Ray, segment: Segment) -> CGPoint? {
+public func getRaySegmentIntersection(ray: Ray, segment: Segment) -> CGPoint? {
     let r, s, d: CGFloat
 
     if (ray.dy * (segment.end.x - segment.start.x) != ray.dx * (segment.end.y - segment.start.y)) {
@@ -103,21 +103,21 @@ func getRaySegmentIntersection(ray: Ray, segment: Segment) -> CGPoint? {
     return nil
 }
 
-func getDelta(angle: Double) -> CGVector {
+public func getDelta(angle: Double) -> CGVector {
     // return the x and y delta values of the angle
     return CGVector(dx: cos(angle), dy: sin(angle))
 }
 
-func getIntermediate(angle: Double) -> Double {
+public func getIntermediate(angle: Double) -> Double {
     // calculate the intermediate value of the angle relative to a right angle
     return abs(abs(angle.truncatingRemainder(dividingBy: Double.pi / 2)) - Double.pi / 4) / (Double.pi / 4)
 }
 
-func normalizeAngle(radians: Double) -> Double {
+public func normalizeAngle(radians: Double) -> Double {
     return radians - Double.pi * 2 * floor(radians / (Double.pi * 2))
 }
 
-func getSegmentSegmentIntersection(segment1: Segment, segment2: Segment) -> CGPoint? {
+public func getSegmentSegmentIntersection(segment1: Segment, segment2: Segment) -> CGPoint? {
     let delta1: CGVector = segment1.end - segment1.start
     let delta2: CGVector = segment2.end - segment2.start
     
@@ -151,7 +151,7 @@ func getSegmentSegmentIntersection(segment1: Segment, segment2: Segment) -> CGPo
     return nil // No intersection
 }
 
-func getSegmentCircleIntersections(circleCenter: CGPoint, radius: CGFloat, start: CGPoint, end: CGPoint) -> [CGPoint] {
+public func getSegmentCircleIntersections(circleCenter: CGPoint, radius: CGFloat, start: CGPoint, end: CGPoint) -> [CGPoint] {
     let v1 = CGVector(dx: end.x - start.x, dy: end.y - start.y)
     let v2 = CGVector(dx: start.x - circleCenter.x, dy: start.y - circleCenter.y)
     
@@ -182,7 +182,7 @@ func getSegmentCircleIntersections(circleCenter: CGPoint, radius: CGFloat, start
     return intersections
 }
 
-func getSegmentRoundedRectangleIntersectionPoints(segment: Segment, rectangle: CGRect, radius: CGFloat) -> [CGPoint] {
+public func getSegmentRoundedRectangleIntersectionPoints(segment: Segment, rectangle: CGRect, radius: CGFloat) -> [CGPoint] {
     let x = rectangle.origin.x,
         y = rectangle.origin.y,
         mx = rectangle.maxX,
@@ -227,8 +227,7 @@ func getSegmentRoundedRectangleIntersectionPoints(segment: Segment, rectangle: C
     return points
 }
 
-// MARK: - Works
-func getSegmentCircleIntersection(segment: Segment, circleOrigin: CGPoint, radius: CGFloat) -> [CGPoint] {
+public func getSegmentCircleIntersection(segment: Segment, circleOrigin: CGPoint, radius: CGFloat) -> [CGPoint] {
     var b, c, d, u1, u2: CGFloat
     var result: [CGPoint] = []
     let vector1: CGVector = segment.vector
@@ -257,12 +256,12 @@ func getSegmentCircleIntersection(segment: Segment, circleOrigin: CGPoint, radiu
     return result
 }
 
-func getRayCircleIntersection(ray: Ray, circleOrigin: CGPoint, radius: CGFloat) -> [CGPoint] {
+public func getRayCircleIntersection(ray: Ray, circleOrigin: CGPoint, radius: CGFloat) -> [CGPoint] {
     getSegmentCircleIntersection(segment: Segment(start: ray.origin, end: CGPoint(x: ray.dx * 999999, y: ray.dy * 999999)), circleOrigin: circleOrigin, radius: radius)
 }
 
 
-func getRayRoundedRectangleIntersection(ray: Ray, rectangle: CGRect, radius: CGFloat) -> [CGPoint] {
+public func getRayRoundedRectangleIntersection(ray: Ray, rectangle: CGRect, radius: CGFloat) -> [CGPoint] {
     let mx = rectangle.maxX,
         my = rectangle.maxY,
         rx = rectangle.minX + radius - 1,
@@ -309,7 +308,7 @@ func getRayRoundedRectangleIntersection(ray: Ray, rectangle: CGRect, radius: CGF
     return points
 }
 
-func getLineBetweenRoundedRectangles(rect1: CGRect, radius1: CGFloat, rect2: CGRect, radius2: CGFloat) -> Segment {
+public func getLineBetweenRoundedRectangles(rect1: CGRect, radius1: CGFloat, rect2: CGRect, radius2: CGFloat) -> Segment {
     
     let direct1 = getRayRoundedRectangleIntersection(ray: Ray(origin: rect1.center, direction: rect2.center - rect1.center), rectangle: rect1, radius: radius1).first ?? CGPoint.zero
     let direct2 = getRayRoundedRectangleIntersection(ray: Ray(origin: rect2.center, direction: rect1.center - rect2.center), rectangle: rect2, radius: radius2).first ?? CGPoint.zero
@@ -317,12 +316,12 @@ func getLineBetweenRoundedRectangles(rect1: CGRect, radius1: CGFloat, rect2: CGR
     return Segment(start: direct1, end: direct2)
 }
 
-func getRayRectangleIntersectionPoints(ray: Ray, rect: CGRect) -> [CGPoint] {
+public func getRayRectangleIntersectionPoints(ray: Ray, rect: CGRect) -> [CGPoint] {
     let segments = rect.getRectangleSegments()
     return segments.compactMap { $0.getIntersection(ray: ray) }
 }
 
-func getRectangleSegmentIntersectedByRay(ray: Ray, rect: CGRect) -> Segment? {
+public func getRectangleSegmentIntersectedByRay(ray: Ray, rect: CGRect) -> Segment? {
     for segment in rect.getRectangleSegments() {
         if getRaySegmentIntersection(ray: ray, segment: segment) != nil {
             return segment
@@ -332,12 +331,10 @@ func getRectangleSegmentIntersectedByRay(ray: Ray, rect: CGRect) -> Segment? {
     return nil
 }
 
-
-func getArrow(from point1: CGPoint, to point2: CGPoint, options: ArrowOptions = ArrowOptions()) -> (CGPoint, CGPoint, CGPoint, CGFloat, CGFloat, CGFloat) {
+public func getArrow(from point1: CGPoint, to point2: CGPoint, options: ArrowOptions = ArrowOptions()) -> (CGPoint, CGPoint, CGPoint, CGFloat, CGFloat, CGFloat) {
     let angle = getAngle(point1: point1, point2: point2)
     let distance = getDistance(point1: point1, point2: point2)
     let angliness = getAngliness(point1: point1, point2: point2)
-    
     let padStart = options.padStart ?? 0
     let padEnd = options.padEnd ?? 0
     let bow = options.bow ?? 0
@@ -385,7 +382,7 @@ func getArrow(from point1: CGPoint, to point2: CGPoint, options: ArrowOptions = 
 }
 
 
-func getBoxToBoxArrow(from rect1: CGRect, to rect2: CGRect, options: ArrowOptions = ArrowOptions()) -> (CGPoint, CGPoint, CGPoint, CGFloat, CGFloat, CGFloat) {
+public func getBoxToBoxArrow(from rect1: CGRect, to rect2: CGRect, options: ArrowOptions = ArrowOptions()) -> (CGPoint, CGPoint, CGPoint, CGFloat, CGFloat, CGFloat) {
     let padStart = options.padStart ?? 0
     let padEnd = options.padEnd ?? 0
     let bow = options.bow ?? 0
