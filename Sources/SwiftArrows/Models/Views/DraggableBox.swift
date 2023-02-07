@@ -45,6 +45,7 @@ public struct DraggableBox<Content: View>: View {
 public struct Draggable<Content: View>: View {
     //@Binding var location: CGPoint
     @Binding var position: CGPoint
+    @State private var privatePosition: CGPoint = .zero
     @State private var offset: CGSize = .zero
     var content: () -> Content
     
@@ -61,11 +62,11 @@ public struct Draggable<Content: View>: View {
                     .onChanged { value in
                        // withAnimation(.spring().speed(1.5)) {
                         offset = value.translation
-                        self.position = position.offset(offset)
+                        self.position = privatePosition.offset(offset)
                        // }
                     }
                     .onEnded { value in
-                        position = CGPoint(x: value.translation.width + position.x, y: value.translation.height + position.y)
+                        privatePosition = CGPoint(x: value.translation.width + privatePosition.x, y: value.translation.height + privatePosition.y)
                         offset = .zero
                         //location = position
                     }
