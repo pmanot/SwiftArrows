@@ -392,8 +392,8 @@ public func getBoxToBoxArrow(from rect1: CGRect, to rect2: CGRect, options: Arro
     let flip = options.flip ?? true
     let straights = options.straights ?? true
     
-    let paddedRect1 = rect1.inset(by: UIEdgeInsets(top: -padStart, left: -padStart, bottom: -padStart, right: -padStart))
-    let paddedRect2 = rect2.inset(by: UIEdgeInsets(top: -padEnd, left: -padEnd, bottom: -padEnd, right: -padEnd))
+    let paddedRect1 = rect1.padded(padStart)
+    let paddedRect2 = rect2.padded(padEnd)
     
     let angle = normalizeAngle(radians: getAngle(point1: rect1.center, point2: rect2.center))
     let distance = getDistance(point1: rect1.center, point2: rect2.center)

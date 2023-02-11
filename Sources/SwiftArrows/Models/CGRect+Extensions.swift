@@ -8,7 +8,7 @@
 import Foundation
 
 public extension CGRect {
-    public func getRectangleSegments() -> [Segment] {
+    func getRectangleSegments() -> [Segment] {
         let x = self.origin.x
         let y = self.origin.y
         let w = self.size.width
@@ -22,7 +22,7 @@ public extension CGRect {
         ]
     }
     
-    public func getRoundedRectangleSegments(r: CGFloat) -> [Segment] {
+    func getRoundedRectangleSegments(r: CGFloat) -> [Segment] {
         let x = origin.x
         let y = origin.y
         let w = size.width
@@ -45,6 +45,10 @@ public extension CGRect {
             Segment(start: CGPoint(x: mrx, y: my), end: CGPoint(x: rx, y: my)),
             Segment(start: CGPoint(x: rx, y: my), end: CGPoint(x: x, y: my))
         ]
+    }
+    
+    func padded(_ amount: CGFloat) -> CGRect {
+        return CGRect(origin: self.origin.offset(CGSize(width: amount, height: amount)), size: self.size + CGSize(width: amount, height: amount))
     }
     
     var vertices: [CGPoint] {
