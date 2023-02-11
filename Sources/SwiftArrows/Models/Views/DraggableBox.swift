@@ -45,12 +45,13 @@ public struct DraggableBox<Content: View>: View {
 public struct Draggable<Content: View>: View {
     //@Binding var location: CGPoint
     @Binding var position: CGPoint
-    @State private var privatePosition: CGPoint = .zero
+    @State private var privatePosition: CGPoint
     @State private var offset: CGSize = .zero
     var content: () -> Content
     
     public init(position: Binding<CGPoint>, content: @escaping () -> Content) {
         self._position = position
+        self.privatePosition = position.wrappedValue
         self.content = content
     }
     
