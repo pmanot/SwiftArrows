@@ -13,10 +13,10 @@ public struct DraggableBox<Content: View>: View {
     @State private var position: CGPoint
     @State private var offset: CGSize = .zero
     var content: () -> Content
-    var onDragChanged: ((DragGesture.Value) -> ())?
-    var onDragEnded: ((DragGesture.Value) -> ())?
+    var onDragChanged: ((CGPoint) -> ())?
+    var onDragEnded: ((CGPoint) -> ())?
     
-    public init(frame: Binding<CGRect>, content: @escaping () -> Content, onDragChanged: ((DragGesture.Value) -> ())? = nil, onDragEnded: ((DragGesture.Value) -> ())? = nil) {
+    public init(frame: Binding<CGRect>, content: @escaping () -> Content, onDragChanged: ((CGPoint) -> ())? = nil, onDragEnded: ((CGPoint) -> ())? = nil) {
         self._frame = frame
         self.position = frame.wrappedValue.center
         self.content = content
@@ -34,14 +34,14 @@ public struct DraggableBox<Content: View>: View {
                        // withAnimation(.spring().speed(1.5)) {
                         offset = value.translation
                         frame = CGRect(x: position.x + offset.width - frame.width/2, y: position.y + offset.height - frame.height/2, width: frame.width, height: frame.height)
-                        onDragChanged?(value)
+                        onDragChanged?(position.offset(offset))
                        // }
                     }
                     .onEnded { value in
                         position = CGPoint(x: value.translation.width + position.x, y: value.translation.height + position.y)
                         offset = .zero
                         frame = CGRect(x: position.x - frame.width/2, y: position.y - frame.height/2, width: frame.width, height: frame.height)
-                        onDragEnded?(value)
+                        onDragEnded?(position)
                         //location = position
                     }
             )
